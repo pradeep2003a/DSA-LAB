@@ -1,158 +1,154 @@
 #include <stdio.h>
 #include <conio.h>
 #include <malloc.h>
+#include <stdlib.h>
 #define TRUE 1
 #define FALSE 0
 
-//Structure Declaration
+// Structure Declaration
 struct node
 {
     int data;
-    struct node *lchild;
-    struct node *rchild;
+    struct node *llink;
+    struct node *rlink;
 };
 
-//typedef 
+// typedef
 typedef struct node *NODE;
-void insert(NODE *, int);
-void node_delete(NODE *);
-void search(NODE *, int, NODE *, NODE *, int *);
+NODE insertion(NODE);
+NODE deletion(NODE);
 void inorder(NODE);
+NODE getnode();
 
-//Main function
+// Main function
 void main()
 {
-    NODE root = 0;
-    int i = 1, num, req;
+    int option;
+    NODE root;
     // clrscr();
-    printf("Enter the num of nodes:  ");
-    scanf("%d", &req);
-    while (i++ <= req)
+    root = getnode();
+    printf("Enter the data for root node\n");
+    scanf("%d", &root->data);
+    while (1)
     {
-        printf("Enter the data\n");
-        scanf("%d", &num);
-        insert(&root, num);
+        printf("\nTree operations\n");
+        printf("1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &option);
+        switch (option)
+        {
+        case 1:
+            root = insertion(root);
+            getch();
+            break;
+        case 2:
+            root = deletion(root);
+            getch();
+            break;
+        case 3:
+            printf("\nInorder traversal\n");
+            inorder(root);
+            getch();
+            break;
+        case 4:
+            exit(0);
+        default:
+            printf("Invalid choice\n");
+        }
     }
-    printf("Nodes before deletion\n");
-    inorder(root);
-    printf("Nodes after deletion\n");
-    node_delete(&root);
-    inorder(root);
-    getch();
 }
 
-//Nodes Insert Function
-void insert(NODE *(root1), int num)
+// Nodes Insert Function
+NODE insertion(NODE root)
 {
-    if ((*root1) == 0)
+    NODE prev, temp, temp1;
+    int item;
+    temp1 = getnode();
+    printf("Enter the data: ");
+    scanf("%d", &temp1->data);
+    printf("%d is successfully inserted\n", temp1->data);
+    item = temp1->data;
+    prev = NULL;
+    temp = root;
+    while (temp != NULL)
     {
-        (*root1) = (NODE)malloc(sizeof(struct node));
-        (*root1)->lchild = (*root1)->rchild = 0;
-        (*root1)->data = num;
+        prev = temp;
+        if (item < temp->data)
+            temp = temp->llink;
+        else
+            temp = temp->rlink;
     }
+    if (item < prev->data)
+        prev->llink = temp1;
+    else
+        prev->rlink = temp1;
+    return root;
+}
+
+// GETNODE Function
+NODE getnode()
+{
+    NODE temp;
+    temp = (NODE)malloc(sizeof(struct node));
+    temp->llink = temp->rlink = NULL;
+    return temp;
+}
+
+// Deletion Function
+NODE deletion(NODE root)
+{
+    NODE cur, parent, suc, q;
+    int item;
+    if (root == NULL)
+    {
+        printf("No elements in tree\n");
+        return root;
+    }
+    printf("Enter the element to be deleted: ");
+    scanf("%d", &item);
+    parent = NULL;
+    cur = root;
+    while (cur != NULL && item != cur->data)
+    {
+        parent = cur;
+        if (item < cur->data)
+            cur = cur->llink;
+        else
+            cur = cur->rlink;
+    }
+    if (cur == NULL)
+    {
+        printf("%d not found", item);
+        return root;
+    }
+    if (cur->llink == NULL)
+        q = cur->rlink;
+    else if (cur->rlink == NULL)
+        q = cur->llink;
     else
     {
-        if (num < ((*root1)->data))
-            insert(&((*root1)->lchild), num);
-        else
-            insert(&((*root1)->rchild), num);
+        suc = cur->rlink;
+        while (suc->llink != NULL)
+            suc = suc->llink;
+        suc->llink = cur->llink;
+        q = cur->rlink;
     }
-    return;
+    if (cur == parent->llink)
+        parent->llink = q;
+    else
+        parent->rlink = q;
+    free(cur);
+    printf("%d is successfully deleted\n", item);
+    return root;
 }
 
-//In-Order Funtion
-void inorder(NODE root4)
+// In-Order Funtion
+void inorder(NODE root)
 {
-    if (root4 != 0)
+    if (root != 0)
     {
-        inorder(root4->lchild);
-        printf("%d=>", root4->data);
-        inorder(root4->rchild);
-    }
-}
-
-//Search Function
-void search(NODE *root3, int num2, NODE *par, NODE *x, int *found)
-{
-    NODE q;
-    q = *root3;
-    *found = FALSE;
-    *par = 0;
-    while (q != 0)
-    {
-        if (num2 == q->data)
-        {
-            *found = TRUE;
-            *x = q;
-            return;
-        }
-        *par = q;
-        if (num2 < q->data)
-            q = q->lchild;
-        else
-            q = q->rchild;
-    }
-    return;
-}
-
-//Delete Function
-void node_delete(NODE *root2)
-{
-    int num1, found;
-    NODE parent, x, xsucc;
-    parent = 0;
-    x = 0;
-    if (*root2 == 0)
-    {
-        printf("\nTree is empty\n");
-        return;
-    }
-    printf("\nEnter data to be deleted: ");
-    scanf("%d", &num1);
-    search(&(*root2), num1, &parent, &x, &found);
-    if (found == FALSE)
-    {
-        printf("Data to be deleted is not found \n", num1);
-        return;
-    }
-    printf("Data to be deleted is found \n", num1);
-    if (x->lchild != 0 && x->rchild != 0)
-    {
-        parent = x;
-        xsucc = x->lchild;
-        while (xsucc->lchild != 0)
-        {
-            parent = xsucc;
-            xsucc = xsucc->lchild;
-        }
-        x->data = xsucc->data;
-        x = xsucc;
-    }
-    if (x->lchild != 0 && x->rchild == 0)
-    {
-        if (parent->lchild == x)
-            parent->lchild = x->lchild;
-        else
-            parent->rchild = x->lchild;
-        free(x);
-        return;
-    }
-    if (x->rchild != 0 && x->lchild == 0)
-    {
-        if (parent->lchild == x)
-            parent->lchild = x->rchild;
-        else
-            parent->rchild = x->rchild;
-        free(x);
-        return;
-    }
-    if (x->lchild == 0 && x->rchild == 0)
-    {
-        if (parent->rchild == x)
-            parent->rchild = 0;
-        else
-            parent->lchild = 0;
-        free(x);
-        return;
+        inorder(root->llink);
+        printf("%d=>", root->data);
+        inorder(root->rlink);
     }
 }

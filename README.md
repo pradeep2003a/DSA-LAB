@@ -25,6 +25,11 @@ https://github.com/pradeep15a/DSA-LAB.git
 9.  [Binary Search Tree](../master/Binarytree.c)
 10. [Evaluation Using BinaryTree](../master/PostfixBinTree.c)
 11. [Insert And Delete Opeartions on BST](../master/InsertAndDeleteBTree.c)
+12. [Right In Threaded Binary Tree](../master/Right_In_Threaded_BT.c)
+13. [Implement Hash Tables](../master/HashTables.c)
+14. [Open Addressed Hash Table](../master/OpenAdressedHashTable.c)
+15. [Write Array Members Into A File](../master/FileWriting.c)
+16. [File Comparision](../master/FileComparision.c)
 
 
 ## Above Given Programs Are Tested In GCC Compiler Add  ``` clrscr(); ``` for correction in TurboC environment
