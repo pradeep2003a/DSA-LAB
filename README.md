@@ -6,10 +6,10 @@
 
 ### To Clone This Repo Paste This :point_down: Command In git bash
 ```
-https://github.com/pradeep15a/DSA-LAB.git
+git clone https://github.com/pradeep2003a/DSA-LAB.git
 ```
 ### Download Zip File :point_down:
-[Download Zip](https://github.com/pradeep15a/DSA-LAB/archive/refs/heads/master.zip)
+[Download Zip](https://github.com/pradeep2003a/DSA-LAB/archive/refs/heads/main.zip)
 
 
 
@@ -37,6 +37,6 @@ https://github.com/pradeep15a/DSA-LAB.git
 
 ## Creator Credits and Contact :point_down: :see_no_evil: 
 ### [Pradeep](https://www.github.com/pradeep15a)
-1. [Instagram](https://www.instagram.com/93__pradeep/)
-2. [Telegram](https://telegram.dog/Stark_Offl)
+1. Instagram [93_pradeep](https://www.instagram.com/93__pradeep/)
+2. Telegram [stark_offl](https://telegram.dog/Stark_Offl)
 3. WhatsApp ``` 7204690840 ```
