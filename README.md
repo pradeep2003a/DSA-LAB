@@ -39,4 +39,4 @@ git clone https://github.com/pradeep2003a/DSA-LAB.git
 ### [Pradeep](https://www.github.com/pradeep15a)
 1. Instagram [93_pradeep](https://www.instagram.com/93__pradeep/)
 2. Telegram [stark_offl](https://telegram.dog/Stark_Offl)
-3. WhatsApp ``` 7204690840 ```
+3. WhatsApp [7204690840](https://wa.me/7204690840/)
